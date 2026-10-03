@@ -1,8 +1,91 @@
 'use client';
+
 import Link from 'next/link';
-import {useSearchParams} from 'next/navigation';
-import {useMemo,useState} from 'react';
+import { Suspense, useMemo, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Icon from '../../components/Icon';
-import {categories,formatKes,products} from '../../lib/data';
-import {useCart} from '../../components/cart-store';
-export default function Catalog(){const params=useSearchParams();const initial=params.get('category')||'all';const [category,setCategory]=useState(initial);const [q,setQ]=useState('');const {add,mode}=useCart();const list=useMemo(()=>products.filter(p=>(category==='all'||p.category===category)&&(!q||`${p.name} ${p.brand}`.toLowerCase().includes(q.toLowerCase()))),[category,q]);return <main className="page"><div className="container"><div className="page-head"><div><div className="eyebrow">CATALOGUE</div><h1>Shop everyday essentials.</h1><p>Switch between retail and wholesale pricing at any time.</p></div><Link className="btn btn-dark" href="/cart"><Icon name="cart"/> Cart</Link></div><div className="catalog-tools"><div className="search-box"><Icon name="search"/><input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search products, brands or categories"/></div><select value={category} onChange={e=>setCategory(e.target.value)}><option value="all">All categories</option>{categories.map(([s,n])=><option key={s} value={s}>{n}</option>)}</select><span className="mode-chip">{mode==='retail'?'Retail prices':'Wholesale prices'}</span></div>{list.length===0?<div className="empty-state"><div className="empty-icon"><Icon name="box" size={30}/></div><h2>No products imported yet</h2><p>The storefront does not invent products. Import legitimate catalogue records through the admin area and they will appear here automatically.</p><Link className="btn btn-primary" href="/admin/imports">Open product importer <Icon name="arrow" size={18}/></Link></div>:<div className="product-grid">{list.map(p=><article className="product-card" key={p.id}><Link href={`/product/${p.slug}`} className="product-media">{p.image?<img src={p.image} alt=""/>:<div><Icon name="box" size={34}/><span>Source image</span></div>}</Link><div className="product-body"><small>{p.brand||p.category}</small><Link href={`/product/${p.slug}`}><h3>{p.name}</h3></Link><p>{p.unit}</p><div className="product-price"><strong>{formatKes(mode==='wholesale'?p.wholesalePrice:p.retailPrice)}</strong><button className="mini-add" onClick={()=>add(p)} aria-label={`Add ${p.name}`}><Icon name="plus" size={18}/></button></div></div></article>)}</div>}</div></main>}
+import { categories, formatKes, products } from '../../lib/data';
+import { useCart } from '../../components/cart-store';
+
+function CatalogContent() {
+  const params = useSearchParams();
+  const initial = params.get('category') || 'all';
+  const [category, setCategory] = useState(initial);
+  const [q, setQ] = useState('');
+  const { add, mode } = useCart();
+
+  const list = useMemo(
+    () =>
+      products.filter(
+        (p) =>
+          (category === 'all' || p.category === category) &&
+          (!q || `${p.name} ${p.brand}`.toLowerCase().includes(q.toLowerCase())),
+      ),
+    [category, q],
+  );
+
+  return (
+    <main className="page">
+      <div className="container">
+        <div className="page-head">
+          <div>
+            <div className="eyebrow">CATALOGUE</div>
+            <h1>Shop everyday essentials.</h1>
+            <p>Switch between retail and wholesale pricing at any time.</p>
+          </div>
+          <Link className="btn btn-dark" href="/cart"><Icon name="cart" /> Cart</Link>
+        </div>
+
+        <div className="catalog-tools">
+          <div className="search-box">
+            <Icon name="search" />
+            <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search products, brands or categories" />
+          </div>
+          <select value={category} onChange={(e) => setCategory(e.target.value)}>
+            <option value="all">All categories</option>
+            {categories.map(([slug, name]) => <option key={slug} value={slug}>{name}</option>)}
+          </select>
+          <span className="mode-chip">{mode === 'retail' ? 'Retail prices' : 'Wholesale prices'}</span>
+        </div>
+
+        {list.length === 0 ? (
+          <div className="empty-state">
+            <div className="empty-icon"><Icon name="box" size={30} /></div>
+            <h2>No products imported yet</h2>
+            <p>The storefront does not invent products. Import legitimate catalogue records through the admin area and they will appear here automatically.</p>
+            <Link className="btn btn-primary" href="/admin/imports">Open product importer <Icon name="arrow" size={18} /></Link>
+          </div>
+        ) : (
+          <div className="product-grid">
+            {list.map((p) => (
+              <article className="product-card" key={p.id}>
+                <Link href={`/product/${p.slug}`} className="product-media">
+                  {p.image ? <img src={p.image} alt={p.name} /> : <div><Icon name="box" size={34} /><span>Source image</span></div>}
+                </Link>
+                <div className="product-body">
+                  <small>{p.brand || p.category}</small>
+                  <Link href={`/product/${p.slug}`}><h3>{p.name}</h3></Link>
+                  <p>{p.unit}</p>
+                  <div className="product-price">
+                    <strong>{formatKes(mode === 'wholesale' ? p.wholesalePrice : p.retailPrice)}</strong>
+                    <button className="mini-add" onClick={() => add(p)} aria-label={`Add ${p.name}`}>
+                      <Icon name="plus" size={18} />
+                    </button>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+      </div>
+    </main>
+  );
+}
+
+export default function Catalog() {
+  return (
+    <Suspense fallback={<main className="page"><div className="container"><div className="empty-state" aria-live="polite"><h2>Loading catalogue…</h2><p>Please wait while the catalogue loads.</p></div></div></main>}>
+      <CatalogContent />
+    </Suspense>
+  );
+}
