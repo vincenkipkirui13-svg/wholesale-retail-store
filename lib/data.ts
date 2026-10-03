@@ -18,16 +18,16 @@ export const categories = [
 // Decorative wholesale-style category photography only; product imagery remains tied to imported product records.
 // These images intentionally show bulk stock, cartons, crates and warehouse handling rather than supermarket shelves.
 export const categoryImages: Record<string,string> = {
-  // Deliberately rough, busy market/stock imagery: bulk sacks, crates, mixed goods and working stock.
-  // The visual language is closer to Kenyan/African wholesale trade than polished supermarket shelving.
-  'food-groceries': 'https://images.pexels.com/photos/9956725/pexels-photo-9956725.jpeg?auto=compress&cs=tinysrgb&w=1260',
-  'home-cleaning': 'https://images.pexels.com/photos/6160301/pexels-photo-6160301.jpeg?auto=compress&cs=tinysrgb&w=1260',
-  'personal-care': 'https://images.pexels.com/photos/30020992/pexels-photo-30020992.jpeg?auto=compress&cs=tinysrgb&w=1260',
-  'baby-care': 'https://images.pexels.com/photos/30848031/pexels-photo-30848031.jpeg?auto=compress&cs=tinysrgb&w=1260',
-  'beverages': 'https://images.pexels.com/photos/31961615/pexels-photo-31961615.jpeg?auto=compress&cs=tinysrgb&w=1260',
-  'kitchen-household': 'https://images.pexels.com/photos/10676875/pexels-photo-10676875.jpeg?auto=compress&cs=tinysrgb&w=1260',
-  'tissues-paper': 'https://images.pexels.com/photos/3720483/pexels-photo-3720483.jpeg?auto=compress&cs=tinysrgb&w=1260',
-  'other': 'https://images.pexels.com/photos/36096120/pexels-photo-36096120.jpeg?auto=compress&cs=tinysrgb&w=1260'
+  // Category photography is product-led: one wholesale-store feel, with each card showing the stock that belongs in that department.
+  // No people-focused scenes and no polished supermarket displays.
+  'food-groceries': 'https://images.pexels.com/photos/20329104/pexels-photo-20329104.jpeg?auto=compress&cs=tinysrgb&w=1260',
+  'home-cleaning': 'https://images.pexels.com/photos/6995202/pexels-photo-6995202.jpeg?auto=compress&cs=tinysrgb&w=1260',
+  'personal-care': 'https://images.pexels.com/photos/28846857/pexels-photo-28846857.jpeg?auto=compress&cs=tinysrgb&w=1260',
+  'baby-care': 'https://images.pexels.com/photos/28846860/pexels-photo-28846860.jpeg?auto=compress&cs=tinysrgb&w=1260',
+  'beverages': 'https://images.pexels.com/photos/533353/pexels-photo-533353.jpeg?auto=compress&cs=tinysrgb&w=1260',
+  'kitchen-household': 'https://images.pexels.com/photos/28846853/pexels-photo-28846853.jpeg?auto=compress&cs=tinysrgb&w=1260',
+  'tissues-paper': 'https://images.pexels.com/photos/3958190/pexels-photo-3958190.jpeg?auto=compress&cs=tinysrgb&w=1260',
+  'other': 'https://images.pexels.com/photos/15845375/pexels-photo-15845375.jpeg?auto=compress&cs=tinysrgb&w=1260'
 };
 
 export function formatKes(value:number){return `KSh ${value.toLocaleString('en-KE')}`;}
