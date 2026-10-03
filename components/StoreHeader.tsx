@@ -7,7 +7,7 @@ import {useCart} from './cart-store';
 export default function StoreHeader(){
  const [open,setOpen]=useState(false); const {count,mode,setMode}=useCart();
  return <>
-  <div className="announcement"><span>✦</span> SAM WEST DISTRIBUTES <span>•</span> Wholesale + retail in one store <span>•</span> Everyday value</div>
+  <div className="announcement" aria-label="Store highlights"><div className="announcement-track"><div><span>✦</span> SAM WEST DISTRIBUTES <span>•</span> Wholesale + retail in one store <span>•</span> Everyday value</div><div aria-hidden="true"><span>✦</span> SAM WEST DISTRIBUTES <span>•</span> Wholesale + retail in one store <span>•</span> Everyday value</div></div></div>
   <header className="site-header"><div className="header-inner">
    <button className="icon-btn mobile-menu" onClick={()=>setOpen(!open)} aria-label="Menu"><Icon name={open?'close':'menu'}/></button>
    <Link href="/" className="brand"><span className="brand-mark">SW</span><span><strong>SAM WEST <span>DISTRIBUTES</span></strong><small>Wholesale & Retail</small></span></Link>
