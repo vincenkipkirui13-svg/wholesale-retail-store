@@ -1,0 +1,3 @@
+'use client';
+import {useState} from 'react';import Icon from './Icon';import {useCart} from './cart-store';import type {Product} from '../lib/types';
+export default function AddProduct({product}:{product:Product}){const [done,setDone]=useState(false);const {add}=useCart();return <button className="btn btn-primary wide" onClick={()=>{add(product);setDone(true);}}>{done?<><Icon name="check"/> Added to cart</>:<>Add to cart <Icon name="cart"/></>}</button>}

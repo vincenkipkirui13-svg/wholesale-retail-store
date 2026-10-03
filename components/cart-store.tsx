@@ -1,0 +1,8 @@
+'use client';
+import {createContext,useContext,useEffect,useMemo,useState} from 'react';
+import type {CustomerMode,Product} from '../lib/types';
+type CartItem=Product & {qty:number};
+type Ctx={items:CartItem[];count:number;mode:CustomerMode;setMode:(m:CustomerMode)=>void;add:(p:Product)=>void;remove:(id:string)=>void;setQty:(id:string,q:number)=>void;clear:()=>void;total:number};
+const C=createContext<Ctx|null>(null);
+export function CartProvider({children}:{children:React.ReactNode}){const [items,setItems]=useState<CartItem[]>([]);const [mode,setModeState]=useState<CustomerMode>('retail');useEffect(()=>{try{setItems(JSON.parse(localStorage.getItem('wm-cart')||'[]'));setModeState((localStorage.getItem('wm-mode') as CustomerMode)||'retail')}catch{}} ,[]);useEffect(()=>{localStorage.setItem('wm-cart',JSON.stringify(items))},[items]);useEffect(()=>{localStorage.setItem('wm-mode',mode)},[mode]);const value=useMemo(()=>({items,count:items.reduce((a,b)=>a+b.qty,0),mode,setMode:(m:CustomerMode)=>setModeState(m),add:(p:Product)=>setItems(x=>{const f=x.find(i=>i.id===p.id);return f?x.map(i=>i.id===p.id?{...i,qty:i.qty+1}:i):[...x,{...p,qty:1}]}),remove:(id:string)=>setItems(x=>x.filter(i=>i.id!==id)),setQty:(id:string,q:number)=>setItems(x=>q<=0?x.filter(i=>i.id!==id):x.map(i=>i.id===id?{...i,qty:q}:i)),clear:()=>setItems([]),total:items.reduce((a,i)=>a+i.qty*(mode==='wholesale'?i.wholesalePrice:i.retailPrice),0)}),[items,mode]);return <C.Provider value={value}>{children}</C.Provider>}
+export function useCart(){const v=useContext(C);if(!v)throw new Error('useCart must be used within CartProvider');return v}

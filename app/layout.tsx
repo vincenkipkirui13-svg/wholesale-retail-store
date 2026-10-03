@@ -1,4 +1,6 @@
-import type { Metadata } from 'next';
 import './globals.css';
-export const metadata: Metadata = { title: 'Wholesale & Retail Store', description: 'A modern wholesale and retail product store.' };
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) { return <html lang="en"><body>{children}</body></html>; }
+import Link from 'next/link';
+import StoreHeader from '../components/StoreHeader';
+import {CartProvider} from '../components/cart-store';
+export const metadata={title:'WideMarket — Wholesale & Retail Essentials',description:'A modern wholesale and retail store for everyday household and FMCG essentials.'};
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en-KE"><body><CartProvider><StoreHeader/>{children}<footer className="site-footer"><div className="container footer-grid"><div><div className="brand footer-brand"><span className="brand-mark">W</span><span><strong>WIDE<span>MARKET</span></strong><small>Wholesale & Retail</small></span></div><p>Everyday essentials, one dependable store.</p></div><div><h4>Shop</h4><Link href="/catalog">All products</Link><Link href="/catalog?category=food-groceries">Food & Groceries</Link><Link href="/catalog?category=home-cleaning">Home & Cleaning</Link></div><div><h4>Help</h4><Link href="/checkout">Checkout</Link><Link href="/cart">Cart</Link><Link href="/admin">Admin</Link></div><div><h4>Store</h4><p>Wholesale and retail pricing in one storefront.</p><p className="muted">Payment integration can be enabled after testing.</p></div></div><div className="container footer-bottom"><span>© 2026 WideMarket</span><span>Built mobile-first</span></div></footer></CartProvider></body></html>}

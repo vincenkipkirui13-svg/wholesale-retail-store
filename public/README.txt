@@ -1,0 +1,1 @@
+Store assets belong here. Product images must be supplied by an authorized product source and must remain tied to the correct source product/variant.
