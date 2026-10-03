@@ -15,16 +15,17 @@ export const categories = [
   ['other','Other Essentials','Additional legitimate imported products']
 ] as const;
 
-// Decorative category photography only; product imagery remains tied to imported product records.
+// Decorative wholesale-style category photography only; product imagery remains tied to imported product records.
+// These images intentionally show bulk stock, cartons, crates and warehouse handling rather than supermarket shelves.
 export const categoryImages: Record<string,string> = {
-  'food-groceries': 'https://i2-prod.staffordshire-live.co.uk/incoming/article6648001.ece/ALTERNATES/s615/0_GettyImages-1141999792.jpg',
-  'home-cleaning': 'https://www.joonsquareusa.com/usermanage/image/business/target-cape-north-store-lee-fl-7887/target-cape-north-store-lee-fl-target-cape-north-02.jpg',
-  'personal-care': 'https://cdn.bmstores.co.uk/images/dmImage/SourceImage/668-ashby-de-la-zouch-store-opening-health-beauty.png',
-  'baby-care': 'https://st.benesse.ne.jp/online/images/supermarket_c1.jpg',
-  'beverages': 'https://static2.mondo.rs/Picture/1307226/jpeg/Prodavnica-Market-Namirnice-Pice.jpeg?ts=2025-01-14T11%3A38%3A02',
-  'kitchen-household': 'https://www.edeka.de/uploads/regionen/nordbayern_sachsen_thuringen/maerkte/doelz-beuchaer-8002094/haushaltshelfer-doelz-beuchaer.jpg',
-  'tissues-paper': 'https://cdn.prod.website-files.com/65f9ddc0d85e74ddbea4dae3/65f9ddc0d85e74ddbea4dcae_tissue-768x512.jpeg',
-  'other': 'https://assets.rbl.ms/55139353/origin.jpg'
+  'food-groceries': 'https://images.pexels.com/photos/17161100/pexels-photo-17161100/free-photo-of-woman-pulling-big-sack-with-vegetables.jpeg?auto=compress&dpr=1&w=1260',
+  'home-cleaning': 'https://images.pexels.com/photos/6995202/pexels-photo-6995202.jpeg?auto=compress&dpr=1&w=1260',
+  'personal-care': 'https://images.pexels.com/photos/28846857/pexels-photo-28846857/free-photo-of-warehouse-aisle-stocked-with-health-products.jpeg?auto=compress&dpr=1&w=1260',
+  'baby-care': 'https://images.pexels.com/photos/10834810/pexels-photo-10834810.jpeg?auto=compress&dpr=1&w=1260',
+  'beverages': 'https://images.pexels.com/photos/10134598/pexels-photo-10134598.jpeg?auto=compress&dpr=1&w=1260',
+  'kitchen-household': 'https://images.pexels.com/photos/28846853/pexels-photo-28846853/free-photo-of-wholesale-warehouse-aisle-with-various-products.jpeg?auto=compress&dpr=1&w=1260',
+  'tissues-paper': 'https://images.pexels.com/photos/12585837/pexels-photo-12585837.jpeg?auto=compress&dpr=1&w=1260',
+  'other': 'https://images.pexels.com/photos/29454379/pexels-photo-29454379/free-photo-of-expansive-warehouse-aisle-filled-with-products.jpeg?auto=compress&dpr=1&w=1260'
 };
 
 export function formatKes(value:number){return `KSh ${value.toLocaleString('en-KE')}`;}

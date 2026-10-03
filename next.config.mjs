@@ -1,2 +1,9 @@
-const nextConfig = { reactStrictMode: true, images: { remotePatterns: [{ protocol: 'https', hostname: 'i2-prod.staffordshire-live.co.uk', pathname: '/incoming/**' }, { protocol: 'https', hostname: 'www.joonsquareusa.com', pathname: '/**' }, { protocol: 'https', hostname: 'cdn.bmstores.co.uk', pathname: '/**' }, { protocol: 'https', hostname: 'st.benesse.ne.jp', pathname: '/**' }, { protocol: 'https', hostname: 'static2.mondo.rs', pathname: '/**' }, { protocol: 'https', hostname: 'www.edeka.de', pathname: '/**' }, { protocol: 'https', hostname: 'cdn.prod.website-files.com', pathname: '/**' }, { protocol: 'https', hostname: 'assets.rbl.ms', pathname: '/**' }] } };
+const nextConfig = {
+  reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: 'images.pexels.com', pathname: '/photos/**' }
+    ]
+  }
+};
 export default nextConfig;
