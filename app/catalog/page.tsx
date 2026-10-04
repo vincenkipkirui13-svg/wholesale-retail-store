@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Suspense, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Icon from '../../components/Icon';
-import { categories, formatKes, products } from '../../lib/data';
+import { categories, formatKes, priceTone, products } from '../../lib/data';
 import { useCart } from '../../components/cart-store';
 
 function CatalogContent() {
@@ -67,7 +67,7 @@ function CatalogContent() {
                   <Link href={`/product/${p.slug}`}><h3>{p.name}</h3></Link>
                   <p>{p.unit}</p>
                   <div className="product-price">
-                    <strong>{formatKes(mode === 'wholesale' ? p.wholesalePrice : p.retailPrice)}</strong>
+                    <strong className={priceTone(p.id)}>{formatKes(mode === 'wholesale' ? p.wholesalePrice : p.retailPrice)}</strong>
                     <button className="mini-add" onClick={() => add(p)} aria-label={`Add ${p.name}`}>
                       <Icon name="plus" size={18} />
                     </button>
