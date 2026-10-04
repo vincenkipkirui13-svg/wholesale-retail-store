@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Icon from '../components/Icon';
-import {categories, formatKes, products} from '../lib/data';
+import {categories, formatKes, priceTone, products} from '../lib/data';
 import {useCart} from '../components/cart-store';
 
 export default function Home(){
@@ -24,5 +24,5 @@ export default function Home(){
 
 function HomeProductCard({product}:{product:typeof products[number]}){
   const {add,mode}=useCart();
-  return <article className="product-card"><Link href={`/product/${product.slug}`} className="product-media">{product.image?<img src={product.image} alt={product.name} loading="lazy"/>:<div><Icon name="box" size={34}/><span>Source image</span></div>}</Link><div className="product-body"><small>{product.brand||product.category}</small><Link href={`/product/${product.slug}`}><h3>{product.name}</h3></Link><p>{product.unit}</p><div className="product-price"><strong>{formatKes(mode==='wholesale'?product.wholesalePrice:product.retailPrice)}</strong><button className="mini-add" onClick={()=>add(product)} aria-label={`Add ${product.name}`}><Icon name="plus" size={18}/></button></div></div></article>
+  return <article className="product-card"><Link href={`/product/${product.slug}`} className="product-media">{product.image?<img src={product.image} alt={product.name} loading="lazy"/>:<div><Icon name="box" size={34}/><span>Source image</span></div>}</Link><div className="product-body"><small>{product.brand||product.category}</small><Link href={`/product/${product.slug}`}><h3>{product.name}</h3></Link><p>{product.unit}</p><div className="product-price"><strong className={priceTone(product.id)}>{formatKes(mode==='wholesale'?product.wholesalePrice:product.retailPrice)}</strong><button className="mini-add" onClick={()=>add(product)} aria-label={`Add ${product.name}`}><Icon name="plus" size={18}/></button></div></div></article>
 }
