@@ -1,6 +1,6 @@
 import type { Product } from './types';
 
-// Preview catalogue: 30 products per section (240 total) so the complete browsing layout can be tested.
+// Preview catalogue: 239 legitimate product records so the complete browsing layout can be tested.
 // Product names/prices are preview records based on publicly listed Kenyan-market products.
 // Replace preview records with the authorized production import feed before launch.
 export const products: Product[] = [
