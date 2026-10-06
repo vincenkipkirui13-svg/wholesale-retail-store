@@ -14,6 +14,14 @@ function CatalogContent() {
   const [q, setQ] = useState('');
   const { add, mode } = useCart();
 
+  const catalogJsonLd = {
+    '@context':'https://schema.org',
+    '@type':'ItemList',
+    name:'Sam West Distributes product catalogue',
+    numberOfItems:products.length,
+    itemListElement:products.slice(0,50).map((p,index)=>({'@type':'ListItem',position:index+1,url:`https://samwestdistributes.co.ke/product/${p.slug}`,name:p.name}))
+  };
+
   const list = useMemo(
     () =>
       products.filter(
@@ -25,7 +33,7 @@ function CatalogContent() {
   );
 
   return (
-    <main className="page">
+    <main className="page"><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(catalogJsonLd)}}/>
       <div className="container">
         <div className="page-head">
           <div>
@@ -39,7 +47,7 @@ function CatalogContent() {
         <div className="catalog-tools">
           <div className="search-box">
             <Icon name="search" />
-            <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search products, brands or categories" />
+            <input aria-label="Search products, brands or categories" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search products, brands or categories" />
           </div>
           <select value={category} onChange={(e) => setCategory(e.target.value)}>
             <option value="all">All categories</option>
