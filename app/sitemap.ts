@@ -1,7 +1,7 @@
 import type {MetadataRoute} from 'next';
 import {products} from '../lib/data';
 
-const baseUrl='https://samwestdistributors.co.ke';
+const baseUrl='https://samwestdistributes.co.ke';
 
 export default function sitemap():MetadataRoute.Sitemap{
   const now=new Date();
